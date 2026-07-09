@@ -32,10 +32,13 @@ Antes de comenzar, asegúrese de contar con los siguientes elementos:
 ![](https://github.com/mario-fribla-gonzalez/share-imagenes/blob/main/asignar-acceso-bastion/bastion001.png)
 
 3.  Filtre la VM a la que desea asignar el rol de Bastion. Para este ejemplo, utilizaremos la VM `vm-test-fw`.
+
+![](https://github.com/mario-fribla-gonzalez/share-imagenes/blob/main/asignar-acceso-bastion/bastion002.png)
+
 4.  En la página de la VM, localice y anote el nombre del **Grupo de Recursos** (Resource Group) al que pertenece.
     > **Ejemplo:** Para la VM `vm-test-fw`, el grupo de recursos es `rg-test-prod-eastus-01`.
 
-![Localizar Grupo de Recursos](https://docs.microsoft.com/es-es/azure/azure-resource-manager/management/media/manage-resource-groups-portal/find-resource-group.png)
+![](https://github.com/mario-fribla-gonzalez/share-imagenes/blob/main/asignar-acceso-bastion/bastion003.png)
 
 ---
 
@@ -44,7 +47,13 @@ Antes de comenzar, asegúrese de contar con los siguientes elementos:
 Un pre-requisito fundamental es que exista un grupo en Azure Active Directory (AAD) que contenga a los usuarios que necesitarán acceder a la VM.
 
 1.  En el Portal de Azure, busque y seleccione el servicio **Azure Active Directory**.
+
+![](https://github.com/mario-fribla-gonzalez/share-imagenes/blob/main/asignar-acceso-bastion/bastion004.png)
+
 2.  En el menú de la izquierda, seleccione **Grupos**.
+
+![](https://github.com/mario-fribla-gonzalez/share-imagenes/blob/main/asignar-acceso-bastion/bastion005.png)
+
 3.  Filtre y verifique la existencia de los siguientes grupos de seguridad:
 
 | Identificador | Grupo | Descripción | Obligatorio |
@@ -53,7 +62,17 @@ Un pre-requisito fundamental es que exista un grupo en Azure Active Directory (A
 | **b)** | `Az-Chile-Landing-Zone-Prod-VM-User-Login` | Grupo de seguridad global para acceso a VMs en la Landing Zone. | ✅ Sí |
 | **c)** | `Az-rg-test-prod-eastus-VM-User-Login` | Grupo de seguridad específico para el Grupo de Recursos de la VM. | ⚠️ Si no existe, se creará en el siguiente paso. |
 
-> **Nota:** Si el grupo **a)** (`GRP_Sistema_Test`) no existe, debe solicitarlo al equipo de Operaciones para su creación.
+El grupo **a)** (`GRP_Sistema_Test`) debe existir si o si, de no existir, debe deberá ser solicitado a Operaciones la creación de este grupo que posee los usuarios que poseerán los accesos a la Virtual machine por Bastión.
+
+![](https://github.com/mario-fribla-gonzalez/share-imagenes/blob/main/asignar-acceso-bastion/bastion006.png)
+
+El grupo **b)** (`Az-Chile-Landing-Zone-Prod-VM-User-Login`) debe existir si o si, de no existir, debe cancelar la asignación de Bastión, dado que no existe el grupo necesarios para continuar con esta asignación. Por lo cual, deberá regularizar o aclarecer como corregir el nombre del grupo que se asignará.
+
+![](https://github.com/mario-fribla-gonzalez/share-imagenes/blob/main/asignar-acceso-bastion/bastion007.png)
+
+El grupo **c)** (`Az-rg-test-prod-eastus-VM-User-Login`), si NO existe, esta correcto y se deberá crear en los step’s siguientes.
+
+![](https://github.com/mario-fribla-gonzalez/share-imagenes/blob/main/asignar-acceso-bastion/bastion008.png)
 
 ---
 
